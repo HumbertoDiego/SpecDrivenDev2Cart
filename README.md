@@ -13,26 +13,16 @@
     * Fazer o download e instalar [Start Docker Desktop](https://docs.docker.com/desktop/install/windows-install/ "Start Docker Desktop"); e
     * Fazer o download e instalar o [Windows Subsystem for Linux Kernel](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi "Windows Subsystem for Linux Kernel") (wsl2kernel)
 
+
+  * Mac:
+    * Fazer o download e instalar [Install Docker Desktop on Mac](https://docs.docker.com/desktop/setup/install/mac-install/)
+
   * Debian/Ubuntu: 
     ```shell
     curl -fsSL https://get.docker.com -o get-docker.sh
     sh get-docker.sh
     apt install docker-compose
     ```
-
-### Chaves de API
-
-Vários serviços exigem a criação de chave de api, credenciais de autenticação, OAuth..
-
-#### Para o GMAIL e GDRIVE
-
-Acesse https://console.cloud.google.com/ --> Menu Google Cloud--> API e serviços --> Credenciais --> crie um porjeto se necessário --> Menu Clientes --> Criar ID do cliente do OAuth --> Em Origens Javascript adicione [http://localhost:5678] e URLs de redirecionamento autorizados adicione [http://localhost:5678/rest/oauth2-credential/callback] ou adicione as URL do app que irão usar aas chaves --> Criar
-
-Volte em Menu Google Cloud--> API e serviços --> API e serviços ativados --> + Ativar APIs e serviços --> Em pesquisar procure Gmail API e Google Drive API e ative-os
-
-#### Para Mistral AI
-
-Acesse https://mistral.ai/ --> Try Studio --> Cadastre-se e realize Login --> https://console.mistral.ai/home --> Configurar o Plano Experiment --> Chaves de API --> Minhas Chaves de API --> + Adicionar uma nova chave
 
 ### Ollama
 
@@ -289,3 +279,17 @@ docker start langflow
 Para ambientes que precisam de autenticação, PostgreSQL e configuração mais
 completa, consulte a
 [documentação oficial de implantação do Langflow com Docker](https://docs.langflow.org/deployment-docker).
+
+### Chaves de API
+
+Vários serviços exigem a criação de chave de api, credenciais de autenticação, OAuth..
+
+#### Para o GMAIL e GDRIVE
+
+Acesse https://console.cloud.google.com/ --> Menu Google Cloud--> API e serviços --> Credenciais --> crie um porjeto se necessário --> Menu Clientes --> Criar ID do cliente do OAuth --> Em Origens Javascript adicione [http://localhost:5678] e URLs de redirecionamento autorizados adicione [http://localhost:5678/rest/oauth2-credential/callback] ou adicione as URL do app que irão usar aas chaves --> Criar
+
+Volte em Menu Google Cloud--> API e serviços --> API e serviços ativados --> + Ativar APIs e serviços --> Em pesquisar procure Gmail API e Google Drive API e ative-os
+
+#### Para Mistral AI
+
+Acesse https://mistral.ai/ --> Try Studio --> Cadastre-se e realize Login --> https://console.mistral.ai/home --> Configurar o Plano Experiment --> Chaves de API --> Minhas Chaves de API --> + Adicionar uma nova chave
