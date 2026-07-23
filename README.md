@@ -5,7 +5,7 @@
 **Idéia chave:** Investigar como LLMs locais e livres podem ser usados para transformar especificações cartográficas em procedimentos computacionais verificáveis, integrados a ferramentas abertas de geoprocessamento, visando aumentar a reprodutibilidade, a automação e a qualidade da produção cartográfica.
 
 
-## Experiemntos inicialmente pensados
+## Experimentos inicialmente pensados
 
 Escolha da norma, de preferênica a RDG que já está implementada, gerar os estilos com diversas LLMs e comparar com o implementado.
 
