@@ -202,6 +202,7 @@ No utility model is configured for 'copilot-utility-small' while the selected ma
    (*Bring Your Own Key*), mas o editor ainda não sabe qual modelo deve executar
    tarefas auxiliares, como identificar a intenção do pedido, criar títulos e
    gerar mensagens de commit.
+   
 5. Abra **Manage > Settings** ou execute
    **Preferences: Open Settings (UI)** pela paleta de comandos.
 6. Pesquise por `chat.utilitySmallModel` e, em **Chat: Utility Small Model**,
