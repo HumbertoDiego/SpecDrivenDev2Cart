@@ -4,12 +4,25 @@
 
 **Idéia chave:** Investigar como LLMs locais e livres podem ser usados para transformar especificações cartográficas em procedimentos computacionais verificáveis, integrados a ferramentas abertas de geoprocessamento, visando aumentar a reprodutibilidade, a automação e a qualidade da produção cartográfica.
 
+## Leitura inicial
 
-## Experimentos inicialmente pensados
+https://www.xcapit.com/pt/blog/spec-driven-development-ai-agents
 
-Escolha da norma, de preferênica a RDG que já está implementada, gerar os estilos com diversas LLMs e comparar com o implementado.
+https://dailybits.ai/pt/llm-local-desenvolvimento-offline
 
-Escolha das métricas de avaliação. 
+[CartoAgent (2025, arXiv)](https://arxiv.org/pdf/2505.09936) — framework multi-agente baseado em LLMs multimodais que simula três estágios da prática cartográfica: preparação, design do mapa e avaliação, focado em transferência de estilo de mapas. 
+arxiv
+
+GIS Copilot (Taylor & Francis, 2025) — agente autônomo de GIS para análise espacial que executa operações usando ferramentas predefinidas.
+
+[LLM-Geo (Li & Ning, 2023)](https://www.tandfonline.com/doi/full/10.1080/17538947.2025.2497489) — protótipo pioneiro de GIS potencializado por IA para realizar autonomamente operações geoespaciais como agregação numérica, geração de gráficos e apresentação de mapas usando a API do GPT-4. Taylor & Francis Online
+
+[GeoGPT (Zhang et al., 2024)](https://www.tandfonline.com/doi/full/10.1080/17538947.2025.2458688) — integra LLMs com ferramentas de GIS via LangChain, onde o modelo interpreta pedidos do usuário, planeja os passos necessários e executa sequencialmente ferramentas de coleta de dados, análise espacial e visualização cartográfica. 
+Taylor & Francis Online
+
+## Experimento inicialmente pensados
+
+Escolha da norma, (ET-RDG ou ET-EDGV ou outra), de preferênica que já esteja implementada, gerar os estilos/tabels com diversas LLMs e comparar com o implementado.
 
 ## Requisitos inicialmente pensados
 
