@@ -5,6 +5,12 @@
 **Idéia chave:** Investigar como LLMs locais e livres podem ser usados para transformar especificações cartográficas em procedimentos computacionais verificáveis, integrados a ferramentas abertas de geoprocessamento, visando aumentar a reprodutibilidade, a automação e a qualidade da produção cartográfica.
 
 
+## Experiemntos inicialmente pensados
+
+Escolha da norma, de preferênica a RDG que já está implementada, gerar os estilos com diversas LLMs e comparar com o implementado.
+
+Escolha das métricas de avaliação. 
+
 ## Requisitos inicialmente pensados
 
 ### Docker
@@ -12,8 +18,7 @@
   * Windows:
     * Fazer o download e instalar [Start Docker Desktop](https://docs.docker.com/desktop/install/windows-install/ "Start Docker Desktop"); e
     * Fazer o download e instalar o [Windows Subsystem for Linux Kernel](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi "Windows Subsystem for Linux Kernel") (wsl2kernel)
-
-
+triangul
   * Mac:
     * Fazer o download e instalar [Install Docker Desktop on Mac](https://docs.docker.com/desktop/setup/install/mac-install/)
 
@@ -168,49 +173,46 @@ Connecting to 'deepseek-v3.2:cloud' on 'ollama.com' ⚡
 
 ### VS Code integrado ao Ollama
 
+#### Extensão Built-in GitHub Copilot Chat
+
 O Visual Studio Code pode usar os modelos executados pelo Ollama diretamente no
 chat do editor. Assim, perguntas sobre o projeto e tarefas como explicar, gerar ou
 corrigir código podem ser processadas localmente. Segundo a
 [documentação oficial da integração](https://docs.ollama.com/integrations/vscode),
-são necessários Ollama 0.18.3 ou posterior, VS Code 1.113 ou posterior e a extensão
-GitHub Copilot Chat 0.41.0 ou posterior.
+são necessários Ollama 0.18.3 ou posterior, VS Code 1.113 ou posterior e a
+extensão GitHub Copilot Chat 0.41.0 ou posterior.
 
-1. Instale a extensão Ollama, assim todos os modelos já baixados estarão visíveis para integração. 
+1. Instale a extensão Ollama. Os modelos já baixados ficarão disponíveis para a
+   integração.
 2. Abra a paleta de comandos com `Ctrl+Shift+P` e execute
-   **Chat: Manage Language Models**. A mesma janela pode ser aberta pela opção
-   **Manage Models...** no seletor de modelos do Chat.
-   
-<center><img src="imagens/ollama_list.png"></center>
+   **Chat: Manage Language Models**. A mesma janela pode ser aberta por
+   **Manage Models...**, no seletor de modelos do Chat.
+3. Selecione um modelo local do Ollama.
 
-3. Selecione o modelo.
+   <center><img src="imagens/ollama_list.png"></center>
 
-4. Teste simples. Pergunte ao chat "Adicione um arquivo add.py que recebe uma lista de números via linha de comando e os soma"
-
-#### Configuração do modelo utilitário
-
-Ao selecionar um modelo local, o VS Code pode exibir a mensagem:
+4. Se o VS Code exibir a mensagem abaixo, configure também os modelos
+   utilitários:
 
 ```text
 No utility model is configured for 'copilot-utility-small' while the selected main agent model is BYOK.
 ```
 
-Isso acontece porque o modelo principal foi adicionado por BYOK (*Bring Your Own
-Key*), mas o editor ainda não sabe qual modelo deve executar tarefas auxiliares,
-como identificar a intenção do pedido, criar títulos e gerar mensagens de commit.
-Para corrigir:
-
-1. Clique na engrenagem **Manage** no canto inferior esquerdo do VS Code e depois
-   em **Settings**. Como alternativa, abra a paleta com `Ctrl+Shift+P`, digite
-   **Preferences: Open Settings (UI)** e pressione `Enter`.
-2. Na caixa **Search settings**, na parte superior da tela de configurações,
-   pesquise por `chat.utilitySmallModel`.
-3. Em **Chat: Utility Small Model**, selecione o mesmo modelo local do Ollama ou
-   outro modelo local pequeno e rápido.
-4. Pesquise por `chat.utilityModel` e, em **Chat: Utility Model**, selecione também
-   um modelo local.
-5. Abra um novo Chat. Se o modelo não aparecer nas listas, execute
+   A mensagem aparece porque o modelo principal foi adicionado por BYOK
+   (*Bring Your Own Key*), mas o editor ainda não sabe qual modelo deve executar
+   tarefas auxiliares, como identificar a intenção do pedido, criar títulos e
+   gerar mensagens de commit.
+5. Abra **Manage > Settings** ou execute
+   **Preferences: Open Settings (UI)** pela paleta de comandos.
+6. Pesquise por `chat.utilitySmallModel` e, em **Chat: Utility Small Model**,
+   selecione o mesmo modelo do Ollama ou outro modelo local pequeno e rápido.
+7. Pesquise por `chat.utilityModel` e, em **Chat: Utility Model**, selecione
+   também um modelo local.
+8. Abra um novo Chat. Se os modelos não aparecerem, execute
    **Developer: Reload Window** pela paleta de comandos e tente novamente.
-6. Volte para a janela de **Manage Models...** e selecione o modelo "Auto"
+9. Volte a **Manage Models...** e selecione o modelo **Auto**.
+10. Para testar, selecione um agente de planejamento e solicite: “Crie um código
+    `add.py` que recebe uma lista de números pela linha de comando e os soma”.
 
 O modelo principal e o utilitário não precisam ser iguais. Por exemplo, um modelo
 maior pode ser usado no modo agente e `qwen2.5-coder:1.5b` pode atender às tarefas
@@ -218,6 +220,53 @@ auxiliares, desde que essa variante também esteja baixada no Ollama. Segundo a
 [documentação de modelos do VS Code](https://code.visualstudio.com/docs/agent-customization/language-models),
 modelos BYOK podem ser usados tanto no Chat quanto nessas tarefas utilitárias.
 
+> O `qwen2.5-coder:7b` pode não funcionar de forma confiável com as ferramentas
+> de agente do VS Code. Para fluxos com ferramentas, prefira um modelo mais
+> recente e compatível com esse recurso.
+
+#### Extensão Cline
+
+O [Cline](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev)
+é um assistente de programação para o VS Code que pode ler e editar arquivos,
+executar comandos e trabalhar em etapas de planejamento e execução. Ele aceita
+modelos locais pelo Ollama, sem exigir uma chave de API.
+
+1. Confirme que o Ollama está em execução e que o modelo desejado foi baixado:
+
+   ```shell
+   ollama list
+   ollama pull qwen3-coder:30b
+   ollama pull qwen2.5-coder:7b
+   ```
+
+   Escolha uma variante compatível com a memória disponível. Modelos menores
+   consomem menos recursos, mas podem ter mais dificuldade para usar ferramentas
+   e concluir tarefas longas.
+2. Instale a extensão **Cline** pelo Marketplace do VS Code e abra seu painel na
+   barra lateral.
+3. Clique na engrenagem no canto superior direito do painel. Em
+   **API Provider**, selecione **Ollama**.
+4. Informe a URL do servidor. Em uma instalação local comum, use
+   `http://localhost:11434`. Se o Ollama estiver no contêiner Docker descrito
+   anteriormente, essa mesma URL funcionará porque a porta `11434` foi publicada
+   no computador hospedeiro.
+5. Selecione ou informe exatamente o nome mostrado por `ollama list`, incluindo a
+   variante, por exemplo `qwen3-coder:30b`. Modelos locais não exigem chave de
+   API.
+
+      <center><img src="imagens/clineconf.png"></center>
+
+6. Ative **Use Compact Prompt**, se a opção estiver disponível, para reduzir o
+   tamanho do contexto enviado ao modelo. Ajuste a janela de contexto de acordo
+   com o modelo e a memória do computador.
+7. Envie uma tarefa simples e revise cada ação solicitada pelo Cline antes de
+   aprovar comandos ou alterações em arquivos. Depois de validar o fluxo, ajuste
+   as permissões de aprovação automática conforme o nível de confiança desejado.
+
+Se a conexão falhar, confirme que `http://localhost:11434/api/tags` responde no
+navegador ou com `curl`, confira se o nome do modelo coincide com `ollama list` e
+verifique o firewall. A configuração segue o
+[guia de modelos locais do Cline](https://docs.cline.bot/running-models-locally/overview).
 
 #### Modelos populares para geração de código
 
@@ -237,6 +286,8 @@ modelo | tamanhos disponíveis | exemplo para baixar | uso principal
 
 Consulte sempre a página do modelo para verificar sua licença, tamanho de download,
 janela de contexto e variantes disponíveis.
+
+## Havendo necessidade de agentes mais complexos e tools mais específicas
 
 ### Langflow
 
@@ -293,3 +344,9 @@ Volte em Menu Google Cloud--> API e serviços --> API e serviços ativados --> +
 #### Para Mistral AI
 
 Acesse https://mistral.ai/ --> Try Studio --> Cadastre-se e realize Login --> https://console.mistral.ai/home --> Configurar o Plano Experiment --> Chaves de API --> Minhas Chaves de API --> + Adicionar uma nova chave
+
+
+<!-- 
+git remote add specdev https://github.com/HumbertoDiego/SpecDrivenDev2Cart 
+git add * ; git commit -m "update"; git push specdev main
+-->
