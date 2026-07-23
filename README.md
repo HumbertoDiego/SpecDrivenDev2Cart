@@ -202,7 +202,7 @@ No utility model is configured for 'copilot-utility-small' while the selected ma
    (*Bring Your Own Key*), mas o editor ainda não sabe qual modelo deve executar
    tarefas auxiliares, como identificar a intenção do pedido, criar títulos e
    gerar mensagens de commit.
-   
+
 5. Abra **Manage > Settings** ou execute
    **Preferences: Open Settings (UI)** pela paleta de comandos.
 6. Pesquise por `chat.utilitySmallModel` e, em **Chat: Utility Small Model**,
@@ -255,7 +255,7 @@ modelos locais pelo Ollama, sem exigir uma chave de API.
    variante, por exemplo `qwen3-coder:30b`. Modelos locais não exigem chave de
    API.
 
-      <center><img src="imagens/clineconf.png"></center>
+      <center><img src="imagens/Clineconf.png"></center>
 
 6. Ative **Use Compact Prompt**, se a opção estiver disponível, para reduzir o
    tamanho do contexto enviado ao modelo. Ajuste a janela de contexto de acordo
